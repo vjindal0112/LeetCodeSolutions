@@ -8,12 +8,16 @@
 # incomplete
 
 class Solution:
-    def inorderTraversal(self, root: TreeNode) -> List[int]:
-
     def recurse(self, out, node):
-        if(node.left == None):
+        print(out)
+        if(node.left is None and node.right is None):
             out.append(node.val)
-            recurse(out,node.right)
             return out
+        elif(node.left is None):
+            out.append(node.val)
+            if(node.right is not None):
+                self.recurse(out,node.right)
+        self.recurse(out, node.left)
 
-        recurse(out, node.right)
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        self.recurse([], root)
